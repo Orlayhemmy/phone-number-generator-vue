@@ -1,7 +1,7 @@
 import {
-  shallowMount
+  shallowMount,
 } from '@vue/test-utils';
-import App from '@/components/App.vue';
+import App from '@/App.vue';
 
 describe('App.vue', () => {
   const wrapper = shallowMount(App);
