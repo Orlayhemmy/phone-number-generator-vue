@@ -8,6 +8,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit --coverage",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "node server.js"
   },
   "dependencies": {
