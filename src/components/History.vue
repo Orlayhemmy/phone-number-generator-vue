@@ -1,59 +1,86 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest" target="_blank" rel="noopener">unit-jest</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="table">
+    <div v-if="err" class="table-no-data err">{{err}}</div>
+    <div v-if="!err">
+      <div v-for="(key, value, index) in generatedNum" :key="`entry-${index}`" class="day">
+        <p class="day-list">{{value}}</p>
+        <div v-for="(entry, index) in key" :key="`entry-${index}`" class="time">
+          <p class="time-list">{{entry.gen_time}}</p>
+          <div class="number-list">
+            <p v-for="(data, index) in entry.data" :key="`data-${index}`" class="num">{{data}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
+import * as axios from 'axios';
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String,
+  name: 'History',
+  data() {
+    return {
+      generatedNum: {},
+      err: '',
+    };
+  },
+  created() {
+    axios
+      .get('http://localhost:7000/api/generatedNumbers')
+      .then((res) => {
+        this.generatedNum = res.data.data;
+      })
+      .catch((err) => {
+        this.err = err.message;
+      });
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+<style>
+.table {
+  background-color: #ffffff;
+  border: 1px solid #cccccc59;
+  align-items: center;
+  min-height: 60vh;
+  justify-content: center;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.table-no-data {
+  display: flex;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.err {
+  color: #2c3e508c;
+  font-size: 42px;
 }
-a {
-  color: #42b983;
+.day {
+  padding: 10px;
+  text-align: left;
+  margin: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+.day:nth-child(even) {
+  background: #cccccc7d;
+}
+.day:nth-child(odd) {
+  background: #546e857a;
+}
+.day-list {
+  font-size: 20px;
+}
+.time-list {
+  padding: 10px 0;
+}
+.number-list {
+  padding: 50px;
+  background: white;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.num {
+  font-size: 18px;
+  padding: 10px;
+  font-weight: 400;
 }
 </style>
