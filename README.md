@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Orlayhemmy/phone-number-generator-vue.svg?branch=master)](https://travis-ci.org/Orlayhemmy/phone-number-generator-vue)
+[![Coverage Status](https://coveralls.io/repos/github/Orlayhemmy/phone-number-generator-vue/badge.svg?branch=master)](https://coveralls.io/github/Orlayhemmy/phone-number-generator-vue?branch=master)
+
 # generator
 
 ## Project setup
