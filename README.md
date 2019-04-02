@@ -15,8 +15,6 @@ This is a basic app built to generate 10 digits unique number as phone numbers f
 
 - [Express](https://expressjs.com/) is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 
-- [Nodejs](https://www.postgresql.org/) is an open source object-relational database management system (ORDBMS) with an emphasis on extensibility and standards compliance.
-
 - [Babel](https://babeljs.io/) is a JavaScript compiler for converting codes written in ES6 to ES5 that is supported by many browsers
 
 ## Installation
