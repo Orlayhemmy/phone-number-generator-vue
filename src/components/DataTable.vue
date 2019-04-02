@@ -1,6 +1,13 @@
 <template>
   <div>
     <div class="table-controls">
+      <div class="sort-select">
+        <p>Sort</p>
+        <select class="sort" id="sort" @change="sortPhoneNumbers()">
+          <option value="ascend">Ascending</option>
+          <option value="descend">Descending</option>
+        </select>
+      </div>
       <button class="btn-generate" @click="generatePhoneNumbers()">
         Generate
       </button>
@@ -28,6 +35,7 @@ export default {
     return {
       generatedNumbers: [],
       message: '',
+      min_max: false
     };
   },
   methods: {
@@ -52,13 +60,22 @@ export default {
         }
       }
       const uniqueNumbers = new Set(this.generatedNumbers);
-      return this.sortPhoneNumbers(uniqueNumbers);
+      return this.saveGeneratedNumbers(uniqueNumbers);
     },
-    sortPhoneNumbers(data) {
-      this.generatedNumbers = Array.from(data).sort();
-      this.saveGeneratedNumbers();
+    sortPhoneNumbers(data = this.generatedNumbers, type = event.target.value) {
+      switch (type) {
+        case 'ascend':
+          return this.generatedNumbers = Array.from(data).sort();
+        case 'descend':
+          return this.generatedNumbers = Array.from(data).reverse();
+        case 'max':
+          return this.generatedNumbers = Array.from(data).reverse()[0];
+        case 'min':
+          return this.generatedNumbers = Array.from(data).sort()[0];
+      }
     },
-    saveGeneratedNumbers() {
+    saveGeneratedNumbers(data) {
+      this.sortPhoneNumbers(data, 'ascend');
       axios
         .post('http://localhost:7000/api/storeNumbers', this.generatedNumbers)
         .then((res) => {
@@ -76,7 +93,14 @@ export default {
 
  <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.btn-generate {
+.sort-select {
+  display: flex;
+  align-items: center;
+}
+.sort-select p {
+  margin: 0 10px 0 0;
+}
+.btn-generate, .sort {
   background-color: #4bc295;
   color: #ffffff;
   height: 38px;
@@ -84,6 +108,11 @@ export default {
   border-radius: 3px;
   margin-left: auto;
   outline: none;
+}
+.sort {
+  background: #ffffff;
+  color: #2c3e50;
+  border: 1px solid #ccc;
 }
 .table-controls {
   display: flex;
