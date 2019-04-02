@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Orlayhemmy/phone-number-generator-vue.svg?branch=master)](https://travis-ci.org/Orlayhemmy/phone-number-generator-vue)
-[![Coverage Status](https://coveralls.io/repos/github/Orlayhemmy/phone-number-generator-vue/badge.svg?branch=master)](https://coveralls.io/github/Orlayhemmy/phone-number-generator-vue?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Orlayhemmy/phone-number-generator-vue/badge.svg)](https://coveralls.io/github/Orlayhemmy/phone-number-generator-vue)
 
 # generator
 This is a basic app built to generate 10 digits unique number as phone numbers for telecommunication company.
