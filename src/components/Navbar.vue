@@ -3,7 +3,7 @@
     <div class="top-nav">
       <div class="logo">
         <img src="../assets/list.svg" alt="Logo">
-        <p>Write</p>
+        <p>GenerateIt!</p>
       </div>
     </div>
     <div class="bottom-nav">
@@ -70,6 +70,7 @@ export default {
   font-size: 18px;
   transform: scale(1.8, 1.5);
   padding: 10px 8px;
+  margin-left: -15px;
 }
 .is-active {
   background: #4bc295;

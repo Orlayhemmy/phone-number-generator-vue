@@ -1,10 +1,13 @@
 language: node_js
 node_js:
- - "stable"
-scripts:
- - "npm run test:unit"
+  - "8.11.1"
+env:
+  - NODE_ENV=test
+cache:
+  directories:
+    - "node_modules"  
+script: 
+  - npm run test:unit
 
- after_success:
+after_success:
   - npm run coverage
-  - codeclimate-test-reporter < ./coverage/lcov.info
-  
